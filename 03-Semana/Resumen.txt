@@ -1,0 +1,107 @@
+POVEDA CANTE DANIEL STIVEN
+
+
+
+Entrada de datos 
+
+Usuario
+* Nombre
+* Correo
+* Contraseña
+* Imagen de usuario
+
+Libro
+* Titulo
+* Descripción
+* Imagen/Caratula
+* Estado / Disponibilidad
+
+Prestamo [Historial, Nuevo registro, consultar, devoluciones]Historial
+
+* Fecha prestamo
+* Libro prestado
+* calificación
+
+====================================
+- Entrada de datos (save/read)
+- Acciones
+
+====================================
+1. Persona
+2. Rol 
+3. Usuario
+4. Libro
+5. Categoria
+6. Prestamo
+
+RF1: Gestión de Personas
+
+Descripción: Gestionar el registro de las personas, permitiendo la agregación, modificación, consulta o eliminación del registro. 
+
+Entrada: 
+* Tipo documento (*)
+* Número de documento (*)
+* Primer nombre (*)
+* Segundo nombre
+* Primer Apellido (*)
+* Segundo Apellido
+* Teléfono (*)
+* Dirección (*)
+
+Restricciones: 
+* Si los datos ingresado son correctos,  y esta persona no existe, el sistema mostrará un mensaje de "Registro Exitoso"
+* Si los datos ingresado son correctos, y esta persona ya existe en el sustema, el sistema mostrará un mensaje de "Error, persona ya existe"
+* Si los datos ingresado son incorrectos,  y esta persona no existe, el sistema mostrará un mensaje de "De cumplir con los parámetros de los datos solicitados"
+* El número de documento debe ser único en el sistema
+
+
+RF2: Gestión de Roles
+
+Descripción: Gestionar el registro de las roles, permitiendo la agregación, modificación, consulta o eliminación del registro. 
+
+Entrada: 
+* nombre (*)
+* descripcion (*)
+* estado (*) 
+
+Restricciones: 
+* Para la gestión de la CRUD, no se permite duplicidad de nombre. 
+
+
+RF3: Gestión de Usuarios
+
+Descripción: Gestionar el registro de las usuarios, permitiendo la agregación, modificación, consulta o eliminación del registro. 
+
+Entrada: 
+* usuario(email)(*)
+* contraseña (*)
+* imagen
+* RF(1) asociar a una única persona (*)
+* RF(2) asociar a un único rol(*)
+
+Restricciones: 
+* Un usuario puede pertenece únicamente a una persona. 
+* Un usuario puede tener únicamente un rol. 
+* Usuario debe ser único en el sistema
+* Para la gestión de la CRUD, no se permite duplicidad de usuario.
+
+
+4. Libro
+	* nombre
+	* isbn
+	* imgen
+	* descripcion
+	* autor
+	* estado
+	
+5. Categoria
+	* nombre
+	* descripcion
+	* estado
+
+6. Prestamo
+	* RF usuario
+	* RF libro
+	* fecha
+	* estado 
+	* descripcion
