@@ -1,0 +1,70 @@
+Iniciar un proyecto locamente y crear el Repo:
+git init
+	Abrira la configuración para crear la información del Repo
+
+---
+
+* Descargar un proyecto:
+
+git clone <url-proyecto>
+	Descargara toda la información del proyecto, creando una carpeta con el nombre del proyecto
+
+---
+
+* Hacer Cambios y Guardar:
+
+git add <archivo>
+	Para preparar archivos para el commit.
+git commit -m "Mensaje de lo que hiciste en el proyecto"
+	Para guardar los cambios con un mensaje.
+
+---
+
+* Conectar con un Repositorio remoto
+
+git remote add <nombre-conección> <url-proyecto>
+	Se crea una conección del repositorio actual al remoto
+	Casi siempre <nombre-coneccion> es origin
+
+---
+
+* Ver el Estado del Repositorio:
+
+git status
+	Para ver qué archivos han cambiado y están listos para commit.
+git diff
+	Mira de forma mas detallada todos los cambios realizados con respecto a la versión que va a ser modificada
+
+* Actualizar Repositorio remoto:
+
+git push
+	Para subir tus cambios a un servidor remoto como GitHub o GitLab.
+git pull
+	Para bajar los cambios que otros han hecho.
+git push -u <nombre-coneccion>(Origin por defecto) <nombre-rama>
+	Se usa cuando creas una rama en el repo local y el repositorio remoto no la tiene todavía.
+	Solo se necesita usar una vez, cuando se usa, se puede usar normal "git push" para proximas actualizaciones
+	
+---
+
+* Crear y Fusionar Ramas:
+
+git branch <nombre-de-rama>
+	Para crear una nueva rama.
+git checkout <nombre-de-rama>
+	Para cambiar a esa rama.
+git merge <nombre-de-rama>
+	Para combinar tu rama actual con otra.
+
+--- 
+
+* Stash
+
+git stash
+	Crea un stash de todos los archivos actuales
+git stash list
+	Muestra todos los stash que existen
+git stash apply
+	Aplica los cambios inmediatamente de todos los archivos stasheados
+git stash drop
+	Elimina todos los stash que existen
