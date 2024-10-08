@@ -1,0 +1,10 @@
+@startuml
+
+class actividad{
+    - codigo : String
+    - fecha : LocalDateTime
+    - nombre : String
+    - description : String
+    - usuarioId : Usuario
+}
+@enduml

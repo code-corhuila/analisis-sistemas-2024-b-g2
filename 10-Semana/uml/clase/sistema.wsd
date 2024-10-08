@@ -1,0 +1,19 @@
+@startuml
+
+class usuario{
+    - nombre : String
+    - apellido : String
+    - correo : String
+    - direccion : String
+    - telefono : String
+    - contrasenia : String
+}
+
+class actividad extends usuario{
+    - codigo : String
+    - fecha : LocalDateTime
+    - nombre : String
+    - description : String
+    - usuarioId : Usuario
+}
+@enduml

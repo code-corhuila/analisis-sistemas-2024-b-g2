@@ -1,0 +1,11 @@
+@startuml
+
+class usuario{
+    - nombre : String
+    - apellido : String
+    - correo : String
+    - direccion : String
+    - telefono : String
+    - contrasenia : String
+}
+@enduml
