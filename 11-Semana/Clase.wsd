@@ -1,0 +1,71 @@
+@startuml
+
+class Persona{
+    - nombre : String
+    - apellido : String
+    - telefono : String
+    - correo : String
+    + direccion : String
+    # estado : Boolean
+}
+class Rol{
+    - codigo : String
+    - nombre : String
+    - descripcion : String
+    - estado : Boolean
+}
+    
+
+class Usuario extends Persona{
+    - usuario : String
+    - contrasenia : String
+    - personaId : String
+    - rolId : Rol
+    - estado : Boolean
+}
+
+class Categoria{
+    - codigo : String
+    - nombre : String
+    - descripcion : String
+    - estado : Boolean
+}
+
+class Producto{
+    - codigo : String
+    - nombre : String
+    - descripcion : String
+    - estado : Boolean
+    - Categoria : Categoria
+}
+
+class Inventario{
+    - stock : Integer
+    - valorCompra : Decimal
+    - valorVenta : Decimal
+    - productoId : Producto
+}
+class Factura{
+    - fecha : LocalDateTime
+    - valorPagar : Decimal
+    - usuarioId : Usuario
+}
+    
+class DetalleFactura{
+    - valorPagar : Decimal
+    - cantidad : Integer
+    - facturaId : Factura
+    - productoId : Producto
+}
+    
+
+Usuario *-- Rol
+Producto o-- Categoria
+Inventario *-- Producto
+Factura o-- Usuario
+DetalleFactura *-- Factura
+DetalleFactura *-- Producto
+
+
+
+@enduml
