@@ -5,37 +5,33 @@ class Persona{
     - apellido : String
     - telefono : String
     - correo : String
-    + direccion : String
-    # estado : Boolean
+    - direccion : String
+    
 }
 class Rol{
     - codigo : String
     - nombre : String
     - descripcion : String
-    - estado : Boolean
 }
     
 
-class Usuario extends Persona{
+class Usuario{
     - usuario : String
     - contrasenia : String
-    - personaId : String
+    - personaId : Persona
     - rolId : Rol
-    - estado : Boolean
 }
 
 class Categoria{
     - codigo : String
     - nombre : String
     - descripcion : String
-    - estado : Boolean
 }
 
 class Producto{
     - codigo : String
     - nombre : String
     - descripcion : String
-    - estado : Boolean
     - Categoria : Categoria
 }
 
@@ -55,10 +51,50 @@ class DetalleFactura{
     - valorPagar : Decimal
     - cantidad : Integer
     - facturaId : Factura
-    - productoId : Producto
+    - productoId : Producto    
 }
-    
 
+interface CRUD{
+    + Create : EntityClass(Entity entity)
+    + Update : void(Entity entity, Integer id)
+    + All : List<Entity> (Boolean data)
+    + FindById : Optional<Entity> (Integer id) 
+    + Delete : void (Integer id)
+}
+
+abstract class ABaseEntity implements CRUD{
+    - status : Boolean
+    - createdAt : LocalDateTime
+    - updatedAt : LocalDateTime
+    - deletedAt : LocalDateTime
+    - createdBy : Integer
+    - updatedBy : Integer
+    - deletedBy : Integer
+}
+
+class PersonaI extends ABaseEntity{
+
+}
+class UsuarioI extends ABaseEntity{
+
+}
+class CategoriaI extends ABaseEntity{
+
+}
+class ProductoI extends ABaseEntity{
+
+}
+class InvnetarioI extends ABaseEntity{
+
+}
+class FacturaI extends ABaseEntity{
+
+}
+class DetalleFacturaI extends ABaseEntity{
+
+}
+
+Usuario o-- Persona
 Usuario *-- Rol
 Producto o-- Categoria
 Inventario *-- Producto
