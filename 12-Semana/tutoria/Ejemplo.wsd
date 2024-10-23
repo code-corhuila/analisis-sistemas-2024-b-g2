@@ -1,0 +1,50 @@
+@startuml
+
+interface CRUD{
+    Save();
+    Update();
+    All();
+    FindById();
+    Delete();
+}
+
+abstract class ABaseEntity implements CRUD{
+    - state : Boolean
+    - deltedAt : LocalDateTime
+}
+
+class PersonaI extends ABaseEntity{}
+    
+class CategoriaI extends ABaseEntity{}
+
+class DeporteI extends ABaseEntity{}
+
+class DeportistaI extends ABaseEntity{}
+
+class Persona{
+    - nombre : String
+    - apellido : String
+    - edad : String
+}
+    
+class Categoria{
+    - nombre : String
+    - descripcion : String
+}
+
+class Deporte{
+    - nombre : String
+    - descripcion : String
+    - CategoriaId : Categoria
+}
+
+class Deportista{
+    personaId : Persona
+    deporteId : Deporte
+}
+
+Deportista *-- Persona
+Deporte *--Categoria
+Deportista *-- Deporte
+
+@enduml
