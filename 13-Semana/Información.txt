@@ -1,0 +1,38 @@
+Procedimientos Almacenados? 
+
+
+
+ORM: Object Relational Mapping
+	Convertir los objetos(Clases) en la interpretación del modelo de BD
+Persistencia: Capacidad de mantener los datos (Motor BD)
+
+Hibernate
+JPA:
+
+
+Brandon (1).
+Sebastian Bermudez (1).
+Santiago Morales (1).
+Ana María (1).
+Monica (1).
+Yeferson (1).
+
+Packege => Apellido y PascalCase
+
+Backend => *****
+
+Entity
+	Persona
+	Usuario
+IRepository
+	IPersonaRepository
+	IUsuarioRepository
+IService
+	IPersonaService
+	IUsuarioService
+Service
+	PersonaService
+	UsuarioService
+Controller
+	PersonaController
+	UsuarioController
