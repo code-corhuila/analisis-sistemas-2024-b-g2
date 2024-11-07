@@ -21,18 +21,23 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void update(Cliente cliente, Integer id) {
-        //Validar si existe.
-        Optional<Cliente> up =  repository.findById(id);
+        // Verificar si el registro con el ID dado existe en la base de datos.
+        Optional<Cliente> up = repository.findById(id);
 
-        if(!up.isEmpty()){
-            up.get().setDocumento(cliente.getDocumento());
-            up.get().setNombre(cliente.getNombre());
-            up.get().setCorreo(cliente.getCorreo());
-            repository.save(cliente);
-        }else {
-            System.out.println("No existe registro");
+        if (up.isPresent()) {
+            Cliente existingCliente = up.get();
+            // Actualizar los valores del objeto existente.
+            existingCliente.setDocumento(cliente.getDocumento());
+            existingCliente.setNombre(cliente.getNombre());
+            existingCliente.setCorreo(cliente.getCorreo());
+
+            // Guardar el objeto existente actualizado.
+            repository.save(existingCliente);
+        } else {
+            System.out.println("No existe registro con ID: " + id);
         }
     }
+
 
     @Override
     public List<Cliente> all() {

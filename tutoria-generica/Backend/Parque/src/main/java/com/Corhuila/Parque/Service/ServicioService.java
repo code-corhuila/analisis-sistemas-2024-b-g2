@@ -21,18 +21,24 @@ public class ServicioService implements IServicioService {
 
     @Override
     public void update(Servicio servicio, Integer id) {
-        //Validar si existe.
-        Optional<Servicio> up =  repository.findById(id);
+        // Validar si el registro existe en la base de datos.
+        Optional<Servicio> up = repository.findById(id);
 
-        if(!up.isEmpty()){
-            up.get().setCodigo(servicio.getCodigo());
-            up.get().setNombre(servicio.getNombre());
-            up.get().setPrecioUnitario(servicio.getPrecioUnitario());
-            repository.save(servicio);
-        }else {
-            System.out.println("No existe registro");
+        if (up.isPresent()) {
+            // Obtén el objeto existente y actualiza sus valores
+            Servicio existingServicio = up.get();
+            existingServicio.setCodigo(servicio.getCodigo());
+            existingServicio.setNombre(servicio.getNombre());
+            existingServicio.setPrecioUnitario(servicio.getPrecioUnitario());
+
+            // Guarda solo el objeto existente actualizado
+            repository.save(existingServicio);
+        } else {
+            System.out.println("No existe registro con ID: " + id);
         }
     }
+
+
 
     @Override
     public List<Servicio> all() {

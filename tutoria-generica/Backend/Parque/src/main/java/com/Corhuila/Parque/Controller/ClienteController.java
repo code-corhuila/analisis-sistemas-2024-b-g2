@@ -1,7 +1,7 @@
 package com.Corhuila.Parque.Controller;
 
-import com.Corhuila.Parque.Entity.Servicio;
-import com.Corhuila.Parque.IService.IServicioService;
+import com.Corhuila.Parque.Entity.Cliente;
+import com.Corhuila.Parque.IService.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,28 +11,29 @@ import java.util.Optional;
 
 @Controller
 @RestController
-@RequestMapping("api/servicio")
-public class ServicioController {
+@CrossOrigin("*")
+@RequestMapping("api/cliente")
+public class ClienteController {
     @Autowired
-    private IServicioService service;
+    private IClienteService service;
 
     @PostMapping("")
-    public Servicio save(@RequestBody Servicio servicio) {
-        return service.save(servicio);
+    public Cliente save(@RequestBody Cliente cliente) {
+        return service.save(cliente);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Servicio servicio, @PathVariable Integer id) {
-        service.update(servicio, id);
+    public void update(@RequestBody Cliente cliente, @PathVariable Integer id) {
+        service.update(cliente, id);
     }
 
     @GetMapping("")
-    public List<Servicio> all() {
+    public List<Cliente> all() {
         return service.all();
     }
 
     @GetMapping("/{id}")
-    public Optional<Servicio> findById(@PathVariable Integer id) {
+    public Optional<Cliente> findById(@PathVariable Integer id) {
         return service.findById(id);
     }
 

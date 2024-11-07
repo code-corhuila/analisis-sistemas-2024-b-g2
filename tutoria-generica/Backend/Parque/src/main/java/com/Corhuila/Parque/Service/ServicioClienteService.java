@@ -21,19 +21,24 @@ public class ServicioClienteService implements IServicioClienteService {
 
     @Override
     public void update(ServicioCliente servicioServicioCliente, Integer id) {
-        //Validar si existe.
-        Optional<ServicioCliente> up =  repository.findById(id);
+        // Validar si el registro existe en la base de datos.
+        Optional<ServicioCliente> up = repository.findById(id);
 
-        if(!up.isEmpty()){
-            up.get().setCantidad(servicioServicioCliente.getCantidad());
-            up.get().setTotalPagar(servicioServicioCliente.getTotalPagar());
-            up.get().setClienteId(servicioServicioCliente.getClienteId());
-            up.get().setServicioId(servicioServicioCliente.getServicioId());
-            repository.save(servicioServicioCliente);
-        }else {
-            System.out.println("No existe registro");
+        if (up.isPresent()) {
+            ServicioCliente existingServicioCliente = up.get();
+            // Actualizar los valores del objeto existente.
+            existingServicioCliente.setCantidad(servicioServicioCliente.getCantidad());
+            existingServicioCliente.setTotalPagar(servicioServicioCliente.getTotalPagar());
+            existingServicioCliente.setClienteId(servicioServicioCliente.getClienteId());
+            existingServicioCliente.setServicioId(servicioServicioCliente.getServicioId());
+
+            // Guardar el objeto existente actualizado.
+            repository.save(existingServicioCliente);
+        } else {
+            System.out.println("No existe registro con ID: " + id);
         }
     }
+
 
     @Override
     public List<ServicioCliente> all() {

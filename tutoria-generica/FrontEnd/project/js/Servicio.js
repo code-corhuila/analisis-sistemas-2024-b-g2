@@ -2,9 +2,10 @@ $(document).ready(function () {
     loadData();
 });
 
+// Cargar datos en la tabla
 function loadData() {
     $.ajax({
-        url: 'http://localhost:9000/api/cliente', 
+        url: 'http://localhost:9000/api/servicio',
         method: 'GET',
         success: function (data) {
             let tableContent = '';
@@ -12,9 +13,9 @@ function loadData() {
                 tableContent += `
                     <tr>
                         <td>${item.id}</td>
-                        <td>${item.documento}</td>
+                        <td>${item.codigo}</td>
                         <td>${item.nombre}</td>
-                        <td>${item.correo}</td>
+                        <td>${item.precioUnitario.toFixed(2)}</td>
                         <td>
                             <button class="btn btn-info btn-sm" onclick="editRecord(${item.id})">Editar</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteRecord(${item.id})">Eliminar</button>
@@ -32,12 +33,12 @@ function loadData() {
 function createOrUpdate() {
     const id = $('#id').val();
     const data = {
-        documento: $('#documento').val(),
+        codigo: $('#codigo').val(),
         nombre: $('#nombre').val(),
-        correo: $('#correo').val()
+        precioUnitario: parseFloat($('#precioUnitario').val())
     };
 
-    const url = id ? `http://localhost:9000/api/cliente/${id}` : 'http://localhost:9000/api/cliente'; // Cambia la URL según tu API
+    const url = id ? `http://localhost:9000/api/servicio/${id}` : 'http://localhost:9000/api/servicio';
     const method = id ? 'PUT' : 'POST';
 
     $.ajax({
@@ -48,7 +49,7 @@ function createOrUpdate() {
         success: function () {
             resetForm();
             loadData();
-            alert('Registro guardado con éxito');
+            alert(id ? 'Servicio actualizado con éxito' : 'Servicio creado con éxito');
         },
         error: function (error) {
             console.error('Error al guardar datos', error);
@@ -56,39 +57,45 @@ function createOrUpdate() {
     });
 }
 
+// Editar registro
 function editRecord(id) {
     $.ajax({
-        url: `http://localhost:9000/api/cliente/${id}`, // Cambia la URL a tu API
+        url: `http://localhost:9000/api/servicio/${id}`,
         method: 'GET',
         success: function (data) {
             $('#id').val(data.id);
-            $('#documento').val(data.documento);
+            $('#codigo').val(data.codigo);
             $('#nombre').val(data.nombre);
-            $('#correo').val(data.correo);
+            $('#precioUnitario').val(data.precioUnitario);
+            $('#submitButton').text('Actualizar');
         },
         error: function (error) {
-            console.error('Error al obtener registro', error);
+            console.error('Error al obtener el registro', error);
         }
     });
 }
 
+function resetForm() {
+    $('#id').val('');
+    $('#codigo').val('');
+    $('#nombre').val('');
+    $('#precioUnitario').val('');
+    $('#submitButton').text('Guardar');
+}
+
+// Eliminar registro
 function deleteRecord(id) {
-    if (confirm('¿Estás seguro de eliminar este registro?')) {
+    if (confirm('¿Estás seguro de eliminar este servicio?')) {
         $.ajax({
-            url: `http://localhost:9000/api/cliente/${id}`, // Cambia la URL a tu API
+            url: `http://localhost:9000/api/servicio/${id}`,
             method: 'DELETE',
             success: function () {
                 loadData();
-                alert('Registro eliminado con éxito');
+                alert('Servicio eliminado con éxito');
             },
             error: function (error) {
-                console.error('Error al eliminar registro', error);
+                console.error('Error al eliminar servicio', error);
             }
         });
     }
-}
-
-function resetForm() {
-    $('#id').val('');
-    $('#crudForm')[0].reset();
 }
