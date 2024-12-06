@@ -39,8 +39,8 @@ class Deporte{
 }
 
 class Deportista{
-    personaId : Persona
-    deporteId : Deporte
+    - personaId : Persona
+    - deporteId : Deporte
 }
 
 Deportista *-- Persona
